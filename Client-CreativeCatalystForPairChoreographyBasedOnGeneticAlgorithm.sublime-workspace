@@ -1,0 +1,382 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"i",
+				"italic"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"di",
+				"div	Tag"
+			],
+			[
+				"hi",
+				"highlightJ"
+			],
+			[
+				"curre",
+				"currentFrameP1A"
+			],
+			[
+				"curr",
+				"currentFrameP1DiffA"
+			],
+			[
+				"A",
+				"A"
+			],
+			[
+				"cra",
+				"currentFrameA"
+			],
+			[
+				"takea",
+				"takeAAngles"
+			],
+			[
+				"se",
+				"selectAll"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"loader",
+				"loaderWrap"
+			],
+			[
+				"conver",
+				"convertData"
+			],
+			[
+				"sp",
+				"SPINE"
+			],
+			[
+				"Spin",
+				"SPINE"
+			],
+			[
+				"l_",
+				"L_KNEE"
+			],
+			[
+				"Spne",
+				"SPINE"
+			],
+			[
+				"body",
+				"bodypart"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"last_filter": "pack",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"HTML",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/sunny/Google Drive/2Spring2016/IAT813-AI/Final Project/Client-CreativeCatalystForPairChoreographyBasedOnGeneticAlgorithm"
+	],
+	"file_history":
+	[
+		"/Users/sunny/Google Drive/2Spring2016/IAT813-AI/Final Project/Client-CreativeCatalystForPairChoreographyBasedOnGeneticAlgorithm/index.html",
+		"/Users/sunny/Google Drive/2Spring2016/IAT813-AI/Final Project/CreativeCatalystForPairChoreographyBasedOnGeneticAlgorithm-Client/index.html",
+		"/Users/sunny/Documents/code/Mova/index.html",
+		"/Applications/Adobe Flash Builder 4.6/sdks/4.6.0/frameworks/projects/spark/bundles/zh_TW/components.properties",
+		"/Users/sunny/Documents/code/Mova/img/close.svg",
+		"/Users/sunny/Documents/code/Mova/img/help.svg",
+		"/Users/sunny/Documents/code/Mova/js/test.html",
+		"/Users/sunny/Documents/code/Mova/js/mocom.js",
+		"/Users/sunny/Documents/code/Mova/js/angleData.js",
+		"/Users/sunny/Documents/code/Mova/js/figureAnim.js",
+		"/Users/sunny/Documents/code/Mova/js/moco.js",
+		"/Users/sunny/Documents/code/Mova/index.php",
+		"/Users/sunny/Documents/code/Mova-0.7/index.html",
+		"/Users/sunny/Documents/code/Mova-0.7/js/fileHandler.js",
+		"/Users/sunny/Documents/code/Mova-0.7/js/featureTimelineVis.js",
+		"/Users/sunny/Documents/code/Mova-0.7/js/figureAnim.js",
+		"/Users/sunny/Documents/code/Mova-0.7/index.php",
+		"/Users/sunny/Documents/code/Mova-0.7/annotest.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"instant",
+			"mocom",
+			"createins",
+			"data",
+			"createmultiples",
+			"\n		",
+			"0",
+			"color",
+			"createoverview",
+			"overview",
+			"}\n",
+			"visContentWrapper",
+			"instfr",
+			" */",
+			"overview",
+			"266px",
+			"neededjoint",
+			"createinstview",
+			");\n",
+			"visinstframediff",
+			"Take A",
+			"extend",
+			"diff",
+			"createmultiples",
+			"multiples",
+			"multiple",
+			"createmul",
+			"createoverview",
+			"currentframediff",
+			"conectivity",
+			"createover",
+			"overview",
+			"viscont",
+			"75",
+			"rgba",
+			"B.append(\"path\")\n					.attr(\"class\", \"line\")",
+			"A.append(\"path\")\n					.attr(\"class\", \"line\")",
+			"i",
+			"239",
+			"240",
+			"78px;",
+			"createmultiples",
+			"0px",
+			"multiples",
+			"1px",
+			"90px",
+			"15px",
+			"dotted",
+			"jointsl",
+			"]);\n",
+			"fill",
+			"d3",
+			"			\n",
+			"overviewContainer",
+			"map",
+			"<<<<<<<",
+			">>>>>>>",
+			"extent",
+			"resize",
+			"200",
+			"filter",
+			"mocom.takeBPosition",
+			"mocom.takeAPosition",
+			"-1",
+			"takeBPosition",
+			"takeAPosition",
+			"map",
+			"neededjoint",
+			"neededjoints",
+			"gif",
+			"d3",
+			"onclick",
+			";\n",
+			"none",
+			"viscont",
+			"loader",
+			"this",
+			"{",
+			"= {",
+			"positons",
+			"jointArray1",
+			"bodypart",
+			"dataTrack",
+			"mocap",
+			"datatracks",
+			"mocap",
+			"getPositionsAt",
+			"getPositionAt",
+			"click",
+			"joint ",
+			"joint",
+			"Skeleton",
+			"load",
+			"loadNew",
+			"loadnew",
+			"BVHReader",
+			"reader",
+			"loadDataTrack",
+			"fileSelect",
+			"on(\"click",
+			"onclick",
+			"featDropdown",
+			"bvh ",
+			"getPositionsAt",
+			"BVHReader",
+			"strong",
+			"mouseovergroup"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Client-CreativeCatalystForPairChoreographyBasedOnGeneticAlgorithm.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ind",
+				"index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 200.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
