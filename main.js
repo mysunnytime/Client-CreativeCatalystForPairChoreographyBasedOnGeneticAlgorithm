@@ -1,10 +1,5 @@
 $(function(){
 
-    // poses in the pools
-    var pose1 = document.getElementById("pose1");
-    pose1Width = pose1.width;
-    pose1Height = pose1.height;
-    pose1Context = pose1.getContext("2d");
     // previewFrame
     var previewFrame = document.getElementById("previewFrame");
     previewFrameWidth = previewFrame.width;
@@ -31,7 +26,7 @@ $(function(){
         console.log('error - ' + err);
     };
     socket.onmessage = function (event) {
-        console.log(event.data);
+        // console.log(event.data);
         var bodies = JSON.parse(event.data);
         updatePose(bodies);
         drawPose(curPose, previewFrameContext, previewFrameWidth, previewFrameHeight);
@@ -39,11 +34,11 @@ $(function(){
 
     // btn's on click
     btnCaptL.on("click", function(){
-    	capturePose(curPose, poolMPose);
-    	drawPose(poolMPose[0], pose1Context, pose1Width, pose1Height);
+    	capturePose(curPose, poolMPoses);
+        redrawPool(poolMPoses, "poolMom");
     });
     btnCaptR.on("click", function(){
-    	capturePose(curPose, poolDPose);
+    	capturePose(curPose, poolDPoses);
     });
 
 });
@@ -51,10 +46,10 @@ $(function(){
 // the current pose that we capture.
 var curPose;
 // the poses in poolMom and poolDad
-var poolMPose = [];
-var poolDPose = [];
+var poolMPoses = [];
+var poolDPoses = [];
 // the saved poses
-var savedPose = [];
+var savedPoses = [];
 // update current pose when websocket send a new pose
 var updatePose = function(newPose){
 	curPose = newPose;
@@ -74,11 +69,30 @@ var drawPose = function(pose, cxt, canvW, canvH){
         }
     }
 };
-// capture curPose into pools. pool = poolMPose or poolDPose.
+// capture curPose into pools. pool = poolMPoses or poolDPoses.
 var capturePose = function(pose, pool){
 	pool.push(pose);
 };
-// save a chosen pose to savedPose
+// save a chosen pose to savedPoses
 var savePose = function(pose){
-	savedPose.push(pose); 
+	savedPoses.push(pose); 
 };
+// redraw the pool - used when the content of pools changes
+var redrawPool = function(pool, poolDOMid){
+    var poolDom = $("#"+poolDOMid);
+    var poolPosesDom = poolDom.find(".poolPose");
+    for(var i=0; i<pool.length; i++)
+    {
+        if (i>=poolPosesDom.length)
+        { 
+            poolDom.append('<canvas class="poolPose" width="1920" height="1080"></canvas>');
+        }
+        var poolPosesDom = poolDom.find(".poolPose");
+        var cnt = poolPosesDom.eq(i).get(0);
+        var canvW = cnt.width;
+        var canvH = cnt.height;
+        var cxt = cnt.getContext("2d");
+        drawPose(pool[i], cxt, canvW, canvH);
+    }
+    console.log(poolDOMid + " updated.")
+}

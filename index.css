@@ -23,6 +23,7 @@ html, body{
 	height: 80%;
 	position: absolute;
 	top: 0;
+	overflow-y: scroll;
 }
 
 #poolMom{
