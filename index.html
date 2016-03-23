@@ -2,11 +2,27 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script src="kinect.js"></script>
     <meta charset="utf-8" />
     <title>Client - Creative Catalyst For Pair Choreography Based On Genetic Algorithm</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-    <canvas id="myCanvas" width="1920" height="1080" style="width:100%;height:100%;"/>
+	<div id="wrapper">
+		<div id="poolMom">
+    		<canvas class="poolPose" id="pose1" width="1920" height="1080"></canvas>
+		</div>
+		<div id="poolDad"></div>
+		<div id ="preview">
+    		<canvas id="previewFrame" width="1920" height="1080" style="width:80%;height:80%;"></canvas>
+    		<div class="btn" id="btnCaptureL">< Capture</div>
+    		<div class="btn" id="btnCaptureR">Capture ></div>
+		</div>
+		<div id ="babies"></div>
+		<div id="saved"></div>
+	</div>
+
+    <script src="jquery-2.2.2.min.js"></script>
+    <script src="main.js"></script>
+    <script src="kinect.js"></script>
 </body>
 </html>

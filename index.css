@@ -1,0 +1,76 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper{
+	
+}
+
+#wrapper *{
+	border: 1px #ccc solid;
+}
+
+#poolMom, #poolDad{
+	width: 200px;
+	height: 80%;
+	position: absolute;
+	top: 0;
+}
+
+#poolMom{
+	left: 0;
+}
+
+#poolDad{
+	right: 0;
+}
+
+	.poolPose{
+		margin-top: 10px;
+		margin-left: 10px;
+		width:160px;
+		height:90px;
+	}
+
+#preview{
+	width: 800px;
+	height: 450px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+	#btnCaptureL, #btnCaptureR{
+		width: 100px;
+		height: 30px;
+		position: absolute;
+		bottom: 10px;
+		background-color: #ccc;
+		cursor: pointer;
+	}
+
+	#btnCaptureL{
+		left: 50%;
+		transform: translateX(-120%);
+	}
+
+	#btnCaptureR{
+		left: 50%;
+		transform: translateX(20%);
+	}
+
+#saved{
+	width: 100%;
+	height: 20%;
+	position: absolute;
+	bottom: 0;
+}
