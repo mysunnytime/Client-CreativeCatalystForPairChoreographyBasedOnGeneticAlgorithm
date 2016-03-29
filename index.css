@@ -10,6 +10,16 @@ html, body{
 	padding: 0;
 }
 
+.btn{
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+	background-color: #ccc;
+	cursor: pointer;
+}
+
 #wrapper{
 	
 }
@@ -51,12 +61,6 @@ html, body{
 }
 
 	#btnCaptureL, #btnCaptureR{
-		width: 100px;
-		height: 30px;
-		position: absolute;
-		bottom: 10px;
-		background-color: #ccc;
-		cursor: pointer;
 	}
 
 	#btnCaptureL{
@@ -68,6 +72,29 @@ html, body{
 		left: 50%;
 		transform: translateX(20%);
 	}
+
+#poolBabe{
+	width: 800px;
+	height: 450px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #ccc;
+	display: none;
+}
+
+#btnGenerate{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 220px;
+}
+
+#btnRestart{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 160px;
+}
 
 #saved{
 	width: 100%;
