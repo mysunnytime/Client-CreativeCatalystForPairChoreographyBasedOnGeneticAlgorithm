@@ -73,14 +73,13 @@ html, body{
 		transform: translateX(20%);
 	}
 
-#poolBabe{
+#poolKid{
 	width: 800px;
 	height: 450px;
 	position: absolute;
 	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #ccc;
 	display: none;
 }
 
