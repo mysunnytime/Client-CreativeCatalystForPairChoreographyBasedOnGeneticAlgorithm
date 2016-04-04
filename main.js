@@ -77,13 +77,16 @@ $(function(){
         $("#preview").show();
     });
     // sliders on mousemove
-    slrView.mousemove(function(){
+    slrView.on("mousemove", function(){
         var self = $(this);
-        self.parent().find("span").text(self.val());
-        var rot = self.val() / 100 * 360 - 180;
-        redrawPool(poolKPoses, "poolKid", rot);
-        redrawPool(poolMPoses, "poolMom", rot);
-        redrawPool(poolDPoses, "poolDad", rot);
+        var rot = parseInt(self.val() / 100 * 360 - 180);
+        self.parent().find("span").text(rot);
+        if(isPreview){
+            drawPose(curPose, previewFrameContext, previewFrameWidth, previewFrameHeight, resulution);
+        }
+        redrawPool(poolKPoses, "poolKid");
+        redrawPool(poolMPoses, "poolMom");
+        redrawPool(poolDPoses, "poolDad");
     });
     slrInfluence.mousemove(function(){
         var self = $(this);
@@ -109,23 +112,22 @@ $(function(){
         // console.log(curPose);
     };
     // draw pose in the context
-    var drawPose = function(posesource, cxt, canvW, canvH, elemW, rotate){
-        var pose = posesource.slice();
+    var drawPose = function(posesource, cxt, canvW, canvH, elemW){
+        var rotate = - parseInt(slrView.val() / 100 * 360 - 180);
+        var pose = JSON.parse(JSON.stringify(posesource));
         if(rotate == undefined) rotate = 0;
-        // rotate(pose, rotate);
         var axis = { X: pose[SPINEBASE].X, Z: pose[SPINEBASE].Z};
         if(rotate != 0){
             for (var joint in pose){
                 if (joint != SPINEBASE){
                     var x0 = pose[joint].X - axis.X;
                     var z0 = pose[joint].Z - axis.Z;
-                    console.log(x0 + ", " + z0);
+                    //console.log(x0 + ", " + z0);
                     var r = Math.sqrt(Math.pow(x0, 2) + Math.pow(z0, 2));
                     var alpha = Math.acos(x0/r) / Math.PI * 180;
-                    var beta = Math.asin(z0/r) / Math.PI * 180;
-                    pose[joint].X = r * Math.cos((rotate+alpha)/180*Math.PI);
-                    pose[joint].Z = r * Math.sin((rotate+beta)/180*Math.PI);
-                    console.log(pose[joint].X + ", " + pose[joint].Z);
+                    pose[joint].X = r * Math.cos((rotate+alpha)/180*Math.PI) + axis.X;
+                    pose[joint].Z = r * Math.sin((rotate+alpha)/180*Math.PI) + axis.Z;
+                    //console.log("pose["+joint+"].X: " + pose[joint].X + ", " + "Z: " + pose[joint].Z);
                 }
             }
         }
@@ -238,8 +240,7 @@ $(function(){
     	savedPoses.push(pose); 
     };
     // redraw the pool - used when the content of pools changes
-    var redrawPool = function(pool, poolDOMid, rotate){
-        if(rotate == undefined) rotate = 0;
+    var redrawPool = function(pool, poolDOMid){
 
         var poolDom = $("#"+poolDOMid);
         poolDom.html("");
@@ -253,7 +254,7 @@ $(function(){
             var canvH = cnt.height;
             var cxt = cnt.getContext("2d");
             var resulution = cxt.canvas.clientWidth;
-            drawPose(pool[i], cxt, canvW, canvH, resulution, rotate);
+            drawPose(pool[i], cxt, canvW, canvH, resulution);
         }
         console.log(poolDOMid + " updated.")
     }
@@ -310,7 +311,7 @@ $(function(){
         // initialize gene
         var geneMom = getGene(mom);
         var geneDad = getGene(dad);
-        var geneKid = geneMom.slice();
+        var geneKid = JSON.parse(JSON.stringify(geneMom));
 
         // crossover
         var crossoverPoint1 = parseInt(Math.random()*25);
@@ -394,7 +395,7 @@ $(function(){
     // formate the (x,y,z) skeletal data into gene data (related position one) for GA.
     var getGene = function(creature){
         var jointCnt = creature.length;
-        var gene = creature.slice();
+        var gene = JSON.parse(JSON.stringify(creature));
         for(var i=jointCnt-1; i>=0; i--){
             switch(i){
                 case 24:
@@ -454,7 +455,7 @@ $(function(){
     // formate gene data, the related position one into the (x,y,z) skeletal data.
     var getCreatrue = function(gene){
         var jointCnt = gene.length;
-        var creature = gene.slice();
+        var creature = JSON.parse(JSON.stringify(gene));
         for(var i=0; i<jointCnt; i++){
             switch(i){
 
