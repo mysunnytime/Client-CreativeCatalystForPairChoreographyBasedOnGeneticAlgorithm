@@ -48,12 +48,12 @@ html, body{
 		margin-top: 10px;
 		margin-left: 10px;
 		width:160px;
-		height:90px;
+		height:160px;
 	}
 
 #preview{
-	width: 800px;
-	height: 450px;
+	width: 600px;
+	height: 600px;
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -86,13 +86,42 @@ html, body{
 #btnGenerate{
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 220px;
+	bottom: 120px;
 }
 
 #btnRestart{
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 160px;
+	bottom: 80px;
+}
+
+.slr{
+	width: 250px;
+	height: 40px;
+	position: absolute;
+}
+
+.slr label{
+	width: 90px;
+	display: inline-block;
+}
+
+#slrView{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 260px;
+}
+
+#slrInfluence{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 220px;
+}
+
+#slrIntensity{
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 180px;
 }
 
 #saved{
@@ -101,3 +130,12 @@ html, body{
 	position: absolute;
 	bottom: 0;
 }
+
+/*#test1, #test2{
+	background: #ccc;
+	border: 2px #333 solid;
+	position: absolute;
+}
+#test2{
+	margin-left: 160px;
+}*/

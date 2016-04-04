@@ -10,15 +10,21 @@
 	<div id="wrapper">
 		<div id="poolMom"></div>
 		<div id="poolDad"></div>
-		<div id ="preview">
-    		<canvas id="previewFrame" width="1920" height="1080" style="width:80%;height:80%;"></canvas>
-    		<div class="btn" id="btnCaptureL">< Capture</div>
-    		<div class="btn" id="btnCaptureR">Capture ></div>
-		</div>
 		<div id ="poolKid"></div>
+		<div id="saved"></div>
+        <div id ="preview">
+            <canvas id="previewFrame" width="1200" height="1200" style="width:80%;height:80%;"></canvas>
+            <div class="btn" id="btnCaptureL">< Capture</div>
+            <div class="btn" id="btnCaptureR">Capture ></div>
+        </div>
+        <div class="slr" id="slrView"><label>view</label><input type="range" value="50"><span>50</span></div>
+        <div class="slr" id="slrInfluence"><label>influence</label><input type="range" value="0"><span>0</span></div>
+        <div class="slr" id="slrIntensity"><label>intensity</label><input type="range" value="0"><span>0</span></div>
         <div class="btn" id="btnGenerate">Generate</div>
         <div class="btn" id="btnRestart">Restart</div>
-		<div id="saved"></div>
+
+<!--         <canvas id="test1" width="1200" height="1200" style="width:120px;height:120px;"></canvas>
+        <canvas id="test2" width="1200" height="1200" style="width:120px;height:120px;"></canvas>    -->
 	</div>
 
     <script src="jquery-2.2.2.min.js"></script>
