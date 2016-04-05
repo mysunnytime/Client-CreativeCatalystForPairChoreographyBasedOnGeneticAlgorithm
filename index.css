@@ -8,14 +8,16 @@ html, body{
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background: #333;
+	font-family: "Proxima Nova Regular","Segoe UI",Roboto,"Droid Sans","Helvetica Neue",Arial,sans-serif;
 }
 
 .btn{
 	width: 100px;
 	height: 30px;
 	text-align: center;
+	line-height: 30px;
 	position: absolute;
-	bottom: 10px;
 	background-color: #ccc;
 	cursor: pointer;
 }
@@ -25,15 +27,30 @@ html, body{
 }
 
 #wrapper *{
-	border: 1px #ccc solid;
 }
 
 #poolMom, #poolDad{
-	width: 200px;
-	height: 80%;
+	width: 270px;
+	height: 600px;
 	position: absolute;
 	top: 0;
 	overflow-y: scroll;
+	background: #222222;
+	padding: 0 20px 0 20px;
+}
+
+#poolMom::-webkit-scrollbar, #poolDad::-webkit-scrollbar {
+    width: 8px;
+}
+#poolMom::-webkit-scrollbar-track, #poolDad::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+#poolMom::-webkit-scrollbar-thumb, #poolDad::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+#poolMom::-webkit-scrollbar-thumb:hover, #poolDad::-webkit-scrollbar-thumb:hover {
+	background-color: #777;
 }
 
 #poolMom{
@@ -41,88 +58,174 @@ html, body{
 }
 
 #poolDad{
-	right: 0;
+	left: 1100px;
 }
-
-	.poolPose{
+	.poolPoseWrap{
 		margin-top: 10px;
 		margin-left: 10px;
-		width:160px;
-		height:160px;
+		width:114px;
+		height:114px;
+		border: 3px solid transparent;
+	    -webkit-transition: all .5s;
+	    transition: all .5s;
+	    display: inline-block;
 	}
 
-#preview{
-	width: 600px;
+	.poolPoseWrap:hover{
+		border: 3px solid rgba(150,150,150,0.8);
+	}
+
+	.poolPoseWrap:hover .btnClosePose, .poolPoseWrap:hover .btnLikePose{
+		opacity: 1;
+	}
+
+	.poolPose{
+		width:114px;
+		height:114px;
+	}
+
+	.btnClosePose, .btnLikePose{
+		width: 22px;
+		height: 20px;
+		display: block;
+		position: absolute;
+		margin-left: 90px;
+		opacity: 0;
+	    -webkit-transition: all .5s;
+	    transition: all .5s;
+	    cursor: pointer;
+	}
+
+	.btnClosePose{
+    	margin-top: -115px;
+    	background-image: url("icon-close.svg");
+    	background-size: 20px;	
+    }
+
+	.btnLikePose{
+    	margin-top: -26px;
+    	background-image: url("icon-heart.svg");
+    	background-size: 22px;	
+	}
+
+	#poolKid .poolPoseWrap{
+		width:144px;
+		height:144px;
+	}
+
+	#poolKid .poolPose{
+		width:144px;
+		height:144px;
+	}
+
+	#poolKid .btnClosePose, #poolKid .btnLikePose{
+		margin-left: 116px;
+	}
+
+	#poolKid .btnLikePose{
+    	margin-top: -26px;
+    	background-image: url("icon-heart.svg");
+    	background-size: 22px;	
+	}
+
+#center{
+	width: 800px;
 	height: 600px;
 	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 300px;
+	background: rgba(80,80,80,0.8);
 }
 
+#previewWrap{
+	width: 500px;
+	height: 560px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(80,80,80,0.8);
+	padding: 20px;
+}
+
+#preview{
+	width: 500px;
+	height: 560px;
+}
+	#preview canvas{
+		width: 480px;
+		height: 480px;
+		border: rgba(100,100,100,0.8) 4px solid;
+	}
+
 	#btnCaptureL, #btnCaptureR{
+		font-size: 12px;
+		bottom: 50px;
 	}
 
 	#btnCaptureL{
 		left: 50%;
-		transform: translateX(-120%);
+		transform: translateX(-110%);
 	}
 
 	#btnCaptureR{
 		left: 50%;
-		transform: translateX(20%);
+		transform: translateX(10%);
 	}
 
 #poolKid{
-	width: 800px;
-	height: 450px;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 490px;
+	height: 560px;
 	display: none;
+	border: rgba(100,100,100,0.8) 4px solid;
 }
 
-#btnGenerate{
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 120px;
-}
-
-#btnRestart{
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 80px;
-}
-
-.slr{
-	width: 300px;
-	height: 40px;
+#options{
+	width: 260px;
+	height: 600px;
 	position: absolute;
+	left: 540px;
+	color: #fff;
+	font-size: 12px;
 }
 
-.slr label{
-	width: 90px;
-	display: inline-block;
-}
+	.slr{
+		width: 250px;
+		height: 40px;
+		position: absolute;
+	}
 
-#slrView{
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 260px;
-}
+	.slr label{
+		width: 80px;
+		display: inline-block;
+	}
 
-#slrInfluence{
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 220px;
-}
+	#slrView{
+		left: 20px;
+		top: 20px;
+	}
 
-#slrIntensity{
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 180px;
-}
+	#slrInfluence{
+		left: 20px;
+		top: 50px;
+	}
+
+	#slrIntensity{
+		left: 20px;
+		top: 80px;
+	}
+
+	#btnGenerate, #btnRestart{
+		background: #33A4EF;
+		color: #fff;
+		top: 120px;
+	}
+
+	#btnGenerate{
+		left: 20px;
+	}
+
+	#btnRestart{
+		left: 140px;
+	}
 
 #saved{
 	width: 100%;

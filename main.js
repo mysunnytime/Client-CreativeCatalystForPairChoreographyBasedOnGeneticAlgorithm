@@ -60,21 +60,34 @@ $(function(){
             alert("Please capture pose first.");
             return;
         }
-        $("#preview").hide();
-        $("#poolKid").show();
+
         generatePoses();
+        
+        $("#preview").fadeOut(1000, function(){
+            $("#poolKid").fadeIn(1000, function(){
+                redrawPool(poolKPoses, "poolKid");
+            });
+        });
 
     });
     btnRestart.on("click", function(){
         isPreview = true;
 
-        poolMPoses = [];
-        poolDPoses = [];
-        redrawPool(poolMPoses, "poolMom");
-        redrawPool(poolMPoses, "poolDad");
+        $("#poolMom").fadeOut(1000, function(){
+            poolMPoses = [];
+            redrawPool(poolMPoses, "poolMom");
+            $("#poolMom").fadeIn(1000);
+        });
 
-        $("#poolKid").hide();
-        $("#preview").show();
+        $("#poolDad").fadeOut(1000, function(){
+            poolDPoses = [];
+            redrawPool(poolDPoses, "poolDad");
+            $("#poolDad").fadeIn(1000);
+        });
+
+        $("#poolKid").fadeOut(1000, function(){
+            $("#preview").fadeIn(1000);
+        });
     });
     // sliders on mousemove
     slrView.on("mousemove", function(){
@@ -112,10 +125,11 @@ $(function(){
         // console.log(curPose);
     };
     // draw pose in the context
-    var drawPose = function(posesource, cxt, canvW, canvH, elemW){
+    var drawPose = function(posesource, cxt, canvW, canvH, elemW, color){
+        // get the rotation for the view and create a pose copy
         var rotate = - parseInt(slrView.val() / 100 * 360 - 180);
         var pose = JSON.parse(JSON.stringify(posesource));
-        if(rotate == undefined) rotate = 0;
+        // make change for the view rotation on the pose copy
         var axis = { X: pose[SPINEBASE].X, Z: pose[SPINEBASE].Z};
         if(rotate != 0){
             for (var joint in pose){
@@ -132,11 +146,13 @@ $(function(){
             }
         }
 
+        // draw the pose in the context
+
         cxt.clearRect(0, 0, canvW, canvH);
-    	
-        cxt.fillStyle = "rgba(255, 160, 17, 0.7)";
-        cxt.strokeStyle = "rgba(255, 160, 17, 0.7)";
-        cxt.lineWidth = 3;
+        if (color == undefined) var color = "rgba(90, 170, 255, 0.7)";
+        cxt.fillStyle = color;
+        cxt.strokeStyle = color;
+        cxt.lineWidth = 4;
         var r = 5*elemW/300*canvW/elemW;
         // draw bones
         for (var joint in pose) {
@@ -245,16 +261,25 @@ $(function(){
         var poolDom = $("#"+poolDOMid);
         poolDom.html("");
         var poolPosesDom = poolDom.find(".poolPose");
+        // color for preview, poolKid
+        var color = "rgba(90, 170, 255, 0.7)";
+        // color for poolMom, poolDad
+        if(pool == poolMPoses) color = "rgba(255, 160, 17, 0.7)";
+        if(pool == poolDPoses) color = "rgba(80, 170, 35, 0.7)";
+        // draw pool
         for(var i=0; i<pool.length; i++)
         {
-            poolDom.append('<canvas class="poolPose" width="500" height="500"></canvas>');
+            if(pool==poolMPoses || pool==poolDPoses) 
+                poolDom.append('<div class="poolPoseWrap"><canvas class="poolPose" width="360" height="360"></canvas><span class="btnClosePose"></span><span class="btnLikePose"></span></div>');
+            else // poolKPoses 
+                poolDom.append('<div class="poolPoseWrap"><canvas class="poolPose" width="430" height="430"></canvas><span class="btnLikePose"></span></div>');
             var poolPosesDom = poolDom.find(".poolPose");
             var cnt = poolPosesDom.eq(i).get(0);
             var canvW = cnt.width;
             var canvH = cnt.height;
             var cxt = cnt.getContext("2d");
             var resulution = cxt.canvas.clientWidth;
-            drawPose(pool[i], cxt, canvW, canvH, resulution);
+            drawPose(pool[i], cxt, canvW, canvH, resulution, color);
         }
         console.log(poolDOMid + " updated.")
     }
@@ -262,13 +287,12 @@ $(function(){
     // generate 10 poses
     var generatePoses = function(){
         poolKPoses = [];
-        for(var i=0; i<8; i++){
+        for(var i=0; i<9; i++){
             console.log("////////// #" + i + " photos /////////");
             var pose1 = poolMPoses[parseInt(Math.random()*poolMPoses.length)];
             var pose2 = poolDPoses[parseInt(Math.random()*poolDPoses.length)];
             poolKPoses.push(generatePose(pose1, pose2));
         }
-        redrawPool(poolKPoses, "poolKid");
     };
 
     ///////// Here's the genetic algorithm part //////////

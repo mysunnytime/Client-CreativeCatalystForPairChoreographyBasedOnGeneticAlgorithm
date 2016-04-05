@@ -10,18 +10,24 @@
 	<div id="wrapper">
 		<div id="poolMom"></div>
 		<div id="poolDad"></div>
-		<div id ="poolKid"></div>
-		<div id="saved"></div>
-        <div id ="preview">
-            <canvas id="previewFrame" width="1500" height="1500" style="width:80%;height:80%;"></canvas>
-            <div class="btn" id="btnCaptureL">< Capture</div>
-            <div class="btn" id="btnCaptureR">Capture ></div>
+        <div id="center">
+            <div id="previewWrap">
+                <div id ="preview">
+                    <canvas id="previewFrame" width="2000" height="2000" ></canvas>
+                    <div class="btn" id="btnCaptureL">< Capture</div>
+                    <div class="btn" id="btnCaptureR">Capture ></div>
+                </div>
+                <div id ="poolKid"></div>
+            </div>
+            <div id="options">
+                <div class="slr" id="slrView"><label>view</label><input type="range" value="50"><span>0</span></div>
+                <div class="slr" id="slrInfluence"><label>influence</label><input type="range" value="0"><span>0</span></div>
+                <div class="slr" id="slrIntensity"><label>intensity</label><input type="range" value="0"><span>0</span></div>
+                <div class="btn" id="btnGenerate">Generate</div>
+                <div class="btn" id="btnRestart">Restart</div>
+            </div>
         </div>
-        <div class="slr" id="slrView"><label>view</label><input type="range" value="50"><span>0</span></div>
-        <div class="slr" id="slrInfluence"><label>influence</label><input type="range" value="0"><span>0</span></div>
-        <div class="slr" id="slrIntensity"><label>intensity</label><input type="range" value="0"><span>0</span></div>
-        <div class="btn" id="btnGenerate">Generate</div>
-        <div class="btn" id="btnRestart">Restart</div>
+        <div id="saved"></div>
 
 <!--         <canvas id="test1" width="1200" height="1200" style="width:120px;height:120px;"></canvas>
         <canvas id="test2" width="1200" height="1200" style="width:120px;height:120px;"></canvas>    -->
