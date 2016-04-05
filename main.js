@@ -16,6 +16,7 @@ $(function(){
     var btnGenerate = $("#btnGenerate");
     // btn to restart capturing
     var btnRestart = $("#btnRestart");
+
     // sliders
     var slrView = $("#slrView").find("input");
     var slrInfluence = $("#slrInfluence").find("input");
@@ -89,6 +90,7 @@ $(function(){
             $("#preview").fadeIn(1000);
         });
     });
+
     // sliders on mousemove
     slrView.on("mousemove", function(){
         var self = $(this);
@@ -271,8 +273,11 @@ $(function(){
         {
             if(pool==poolMPoses || pool==poolDPoses) 
                 poolDom.append('<div class="poolPoseWrap"><canvas class="poolPose" width="360" height="360"></canvas><span class="btnClosePose"></span><span class="btnLikePose"></span></div>');
-            else // poolKPoses 
+            else if(pool==poolKPoses)
                 poolDom.append('<div class="poolPoseWrap"><canvas class="poolPose" width="430" height="430"></canvas><span class="btnLikePose"></span></div>');
+            else if(pool==savedPoses)
+                poolDom.append('<div class="poolPoseWrap"><canvas class="poolPose" width="430" height="430"></canvas><span class="btnClosePose"></span></div>');
+
             var poolPosesDom = poolDom.find(".poolPose");
             var cnt = poolPosesDom.eq(i).get(0);
             var canvW = cnt.width;
@@ -281,6 +286,39 @@ $(function(){
             var resulution = cxt.canvas.clientWidth;
             drawPose(pool[i], cxt, canvW, canvH, resulution, color);
         }
+
+        // btns on pose canvas
+        $(".btnClosePose")
+        .off("click")
+        .on("click", function(){
+            // find the pose index in the pool
+            var self = $(this);
+            var index = self.parent().parent().find(".btnClosePose").index(self);
+            // delete the coresponding pose in the backstage pool (array)
+            var poolref;
+            if(self.parent().parent().attr("id")=="poolMom") poolref = poolMPoses;
+            else if(self.parent().parent().attr("id")=="poolDad") poolref = poolDPoses;
+            else if(self.parent().parent().attr("id")=="saved") poolref = savedPoses;
+            poolref.splice(index, 1);
+            // update the pool
+            redrawPool(poolref, self.parent().parent().attr("id"));
+        });
+        $(".btnLikePose")
+        .off("click")
+        .on("click", function(){
+            // find the pose index in the pool
+            var self = $(this);
+            var index = self.parent().parent().find(".btnLikePose").index(self);
+            // add coresponding pose in the backstage pool (array)
+            var poolref;
+            if(self.parent().parent().attr("id")=="poolMom") poolref = poolMPoses;
+            else if(self.parent().parent().attr("id")=="poolDad") poolref = poolDPoses;
+            else if(self.parent().parent().attr("id")=="saved") poolref = savedPoses;
+            savePose(poolref[index]);
+            // update the pool
+            redrawPool(savedPoses, "saved");
+        });
+
         console.log(poolDOMid + " updated.")
     }
 
