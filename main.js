@@ -66,7 +66,7 @@ $(function(){
     	capturePose(curPose, poolDPoses);
         redrawPool(poolDPoses, "poolDad");
     });
-    btnGenerate.on("click", function(){
+    var callbackForBtnGenerate = function(){
         isPreview = false;
         if(poolMPoses.length==0 || poolDPoses.length==0){
             alert("Please capture pose first.");
@@ -83,8 +83,10 @@ $(function(){
             btnNewMom.fadeIn();
             btnNewDad.fadeIn();
         });
-    });
-    var generate = function
+    };
+    btnGenerate
+    .off("click")
+    .on("click", callbackForBtnGenerate);
     btnRestart.on("click", function(){
         isPreview = true;
 
@@ -109,12 +111,25 @@ $(function(){
     // btns for generate new mom and dad pools
     btnNewMom.on("click", function(){
         selectionState = SELECTION_MOM;
+
+        // disable generate btn
+        btnGenerate
+        .off("click")
+        .on("click", function(){
+            alert("Please cancel the capturing before you generate new ones.");
+        });
+
+        // hide capture btns
         var left = btnNewMom.css("left");
         btnNewMom.fadeOut();
         btnNewDad.fadeOut();
         $("#poolMom .poolPoseWrap").fadeOut();
+
+        // set positons for apply & cancel btn
         btnNewApply.css({"right":"","left": left, "background":"rgba(255, 160, 17, 1)"});
         btnNewCancel.css({"right":"","left": parseInt(left, 10) + 120 + "px"});
+
+        // set selectable poses to selectable state
         $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").addClass("poolPoseSelectableToMom");
         $(".poolPoseSelectableToMom")
         .off("click")
@@ -122,12 +137,20 @@ $(function(){
             var self = $(this);
             self.toggleClass("poolPoseToMom");
         });
+
+        // display apply & cancel btn
         btnNewApply.fadeIn();
         btnNewCancel.fadeIn();
     });
 
     btnNewDad.on("click", function(){
+        // same machenism as btnNewMom
         selectionState = SELECTION_DAD;
+        btnGenerate
+        .off("click")
+        .on("click", function(){
+            alert("please cancel the capture session first.");
+        });
         var right = btnNewDad.css("right");
         console.log(right);
         btnNewMom.fadeOut();
@@ -188,11 +211,12 @@ $(function(){
             $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").removeClass("poolPoseToDad");
         }
 
-        console.log("haha");
-
         selectionState = SELECTION_OFF;
 
         // return
+        btnGenerate
+        .off("click")
+        .on("click", callbackForBtnGenerate);
         btnNewCancel.fadeOut();
         btnNewApply.fadeOut();
         btnNewMom.fadeIn();
