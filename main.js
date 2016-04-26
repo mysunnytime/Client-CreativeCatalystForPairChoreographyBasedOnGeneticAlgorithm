@@ -1,6 +1,10 @@
 $(function(){
     // preview state
     var isPreview = true;
+    // for the cancel btn in capture new process.
+    // it becomes "true" in callback function for btn cancel, back to "false" at the end of the callback
+    // when it is true, we don't restore the class "poolPoseSelectableToMom", "poolPoseSelectableToDad"
+    var isSelectionToBeCanceled = false;
     // generate new pool state
     var SELECTION_OFF = 0;
     var SELECTION_MOM = 1;
@@ -188,7 +192,7 @@ $(function(){
         tmpSavedSelected.each(function(){
             var self = $(this);
             var index = $("#saved .poolPoseWrap").index(self);
-            tmpPoses.push(poolKPoses[index]);
+            tmpPoses.push(savedPoses[index]);
         });
 
         if(selectionState==SELECTION_MOM){
@@ -225,15 +229,26 @@ $(function(){
     });
 
     btnNewCancel.on("click", function(){
+        isSelectionToBeCanceled = true;
         if(selectionState==SELECTION_MOM){
+            // remove classes for selection
             $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").removeClass("poolPoseSelectableToMom");
             $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").removeClass("poolPoseToMom");
+            // redraw pool in case the view rotation is changed
+            redrawPool(poolMPoses, "poolMom");
         }
         if(selectionState==SELECTION_DAD){
+            // same as above
             $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").removeClass("poolPoseSelectableToDad");
             $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").removeClass("poolPoseToDad");
+            redrawPool(poolDPoses, "poolDad");
         }
+        isSelectionToBeCanceled = false;
+
         selectionState = SELECTION_OFF;
+        btnGenerate
+        .off("click")
+        .on("click", callbackForBtnGenerate);
         btnNewCancel.fadeOut();
         btnNewApply.fadeOut();
         btnNewMom.fadeIn();
@@ -285,14 +300,19 @@ $(function(){
     // sliders on mousemove
     slrView.on("mousemove", function(){
         var self = $(this);
+        // find rotation value and change the tag
         var rot = parseInt(self.val() / 100 * 360 - 180);
         self.parent().find("span").text(rot);
+        // redraw the current pose (kinect captured one, the only one)
         if(isPreview){
             drawPose(curPose, previewFrameContext, previewFrameWidth, previewFrameHeight, resulution);
         }
+        // redraw pools
+        if(selectionState == SELECTION_OFF){
+            redrawPool(poolMPoses, "poolMom");
+            redrawPool(poolDPoses, "poolDad");
+        }
         redrawPool(poolKPoses, "poolKid");
-        redrawPool(poolMPoses, "poolMom");
-        redrawPool(poolDPoses, "poolDad");
         redrawPool(savedPoses, "saved");
     });
     slrInfluence.mousemove(function(){
@@ -453,8 +473,18 @@ $(function(){
     var redrawPool = function(pool, poolDOMid){
 
         var poolDom = $("#"+poolDOMid);
+
+        // keep class info of selectables
+        // we want to keep the class information if there are classed for "Capture New" ("poolPoseSelectableToMom", "poolPoseToMom", "poolPoseSelectableToDad", "poolPoseToDad"), so that when we change the view perspective and update the pool the info won't loose
+        var indexOfSelected = [];
+        $("#poolKid .poolPoseToMom, #poolKid .poolPoseToDad").each(function(){
+            var self = $(this);
+            var index = $("#poolKid .poolPoseWrap").index(self);
+            indexOfSelected.push(index);
+        });
+
+        // do the redraw
         poolDom.html("");
-        var poolPosesDom = poolDom.find(".poolPose");
         // color for preview, poolKid
         var color = "rgba(90, 170, 255, 0.7)";
         // color for poolMom, poolDad
@@ -481,6 +511,37 @@ $(function(){
             drawPose(pool[i], cxt, canvW, canvH, resulution, color);
         }
 
+        // get back of the class of selectables and selected
+        if(isSelectionToBeCanceled){
+            // do nothing
+        }
+        else{
+            if(selectionState==SELECTION_MOM){
+                $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").addClass("poolPoseSelectableToMom");
+                $(".poolPoseSelectableToMom")
+                .off("click")
+                .on("click", function(){
+                    var self = $(this);
+                    self.toggleClass("poolPoseToMom");
+                });
+                for(var i=0; i<indexOfSelected.length; i++){
+                    $("#poolKid .poolPoseWrap").eq(indexOfSelected[i]).addClass("poolPoseToMom");
+                }
+            }
+            else if(selectionState==SELECTION_DAD){
+                $("#poolKid .poolPoseWrap, #saved .poolPoseWrap").addClass("poolPoseSelectableToDad");
+                $(".poolPoseSelectableToDad")
+                .off("click")
+                .on("click", function(){
+                    var self = $(this);
+                    self.toggleClass("poolPoseToDad");
+                });
+                for(var i=0; i<indexOfSelected.length; i++){
+                    $("#poolKid .poolPoseWrap").eq(indexOfSelected[i]).addClass("poolPoseToDad");
+                }
+            }
+        }
+
         setCallbackForBtnClose();
         setCallbackForBtnLike();
 
@@ -499,7 +560,6 @@ $(function(){
     };
 
     ///////// Here's the genetic algorithm part //////////
-
     // define the skeloton names in the data
     var SPINEBASE   = 0;
     var SPINEMID    = 1;
@@ -551,7 +611,7 @@ $(function(){
 
         // mutation
 
-        // influence means the range (persontage) of joints which will be mutated. 
+        // influence means the range (percontage) of joints which will be mutated. 
         // varies from 0.1 to 1
         var influence = parseInt(slrInfluence.val()) / 100 * 0.9 + 0.1;
         // intensity means the variation range of the mutation for each mutated joint or to what degree the mutated joint is changed.
